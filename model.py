@@ -65,7 +65,9 @@ def get_knn() -> Sequential:
     model = Sequential()
 
     # TODO: Build KNN model
-
+    model.add(Dense(32, input_dim=4, kernel_initializer='normal', activation='relu'))
+    model.add(Dense(1, kernel_initializer='normal'))
+    model.compile(loss='mean_squared_error', optimizer='adam')
     return model
 
 
