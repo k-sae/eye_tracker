@@ -10,7 +10,16 @@ saved_weights_name = 'Weights.h5'
 images_shape = (96, 96, 1)
 
 
-def get_model() -> Sequential:
+def get_model(model: str = 'CNN') -> Sequential:
+
+    return {
+        'CNN': get_cnn,
+        'KNN': get_knn,
+        'SVM': get_svm,
+    }[model]()
+
+
+def get_cnn() -> Sequential:
     """
 
     :rtype: Sequential
@@ -19,7 +28,7 @@ def get_model() -> Sequential:
 
     # !- may kernel size cause crash if it did replace it with (3,3,1)
     # first conv layer
-    model.add(Conv2D(32, 5, input_shape=images_shape, activation='relu'))
+    model.add(Conv2D(32, 5, activation='relu', input_shape=images_shape))
     model.add(MaxPooling2D(2))
 
     # second conv layer
@@ -30,7 +39,7 @@ def get_model() -> Sequential:
     model.add(Conv2D(128, 3, activation='relu'))
     model.add(MaxPooling2D(2))
 
-    # fourth layer 
+    # fourth layer
     model.add(Conv2D(256, 2, activation='relu'))
     model.add(MaxPooling2D(2))
 
@@ -43,6 +52,30 @@ def get_model() -> Sequential:
     model.add(Dense(len(DATA_SET_COLS)))
 
     model.summary()
-    model.compile(loss='mean_squared_error', optimizer='adam', metrics=["accuracy"]
+    model.compile(optimizer='adam', loss='mse', metrics=["accuracy"]
                   )
+    return model
+
+
+def get_knn() -> Sequential:
+    """
+
+    :rtype: Sequential
+    """
+    model = Sequential()
+
+    # TODO: Build KNN model
+
+    return model
+
+
+def get_svm() -> Sequential:
+    """
+
+    :rtype: Sequential
+    """
+    model = Sequential()
+
+    # TODO: Build SVM model
+
     return model

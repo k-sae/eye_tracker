@@ -18,7 +18,7 @@ model = get_model()
 early_stop = EarlyStopping(patience=4, monitor='val_loss')
 history = model.fit(images, predictions,
                     batch_size=batch_size,
-                    nb_epoch=epochs,
+                    epochs=epochs,
                     shuffle=True,
                     validation_split=0.4,
                     callbacks=[checkpoint,
