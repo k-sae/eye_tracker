@@ -1,6 +1,5 @@
 .idea/
 __pycache__
 score.txt
-*.h5
 datasets/
 *.csv
