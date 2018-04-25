@@ -6,12 +6,13 @@ from keras.optimizers import rmsprop, SGD
 
 from core import DATA_SET_COLS
 
-saved_weights_name = 'Weights.h5'
+saved_weights_name = 'CNN_Weights.h5'
 images_shape = (96, 96, 1)
 
 
-def get_model(model: str = 'KNN') -> Sequential:
-
+def get_model(model: str = 'CNN') -> Sequential:
+    global saved_weights_name
+    saved_weights_name = model + "_" + "Weights.h5"
     return {
         'CNN': get_cnn,
         'KNN': get_knn,
