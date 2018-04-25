@@ -10,7 +10,7 @@ saved_weights_name = 'Weights.h5'
 images_shape = (96, 96, 1)
 
 
-def get_model(model: str = 'CNN') -> Sequential:
+def get_model(model: str = 'KNN') -> Sequential:
 
     return {
         'CNN': get_cnn,
@@ -65,8 +65,18 @@ def get_knn() -> Sequential:
     model = Sequential()
 
     # TODO: Build KNN model
-    model.add(Dense(32, input_dim=4, kernel_initializer='normal', activation='relu'))
+    model.add(Conv2D(32, 5, activation='relu', input_shape=images_shape))
+    model.add(MaxPooling2D(2))
+    model.add(Conv2D(64, 5, activation='relu'))
+    model.add(MaxPooling2D(2))
+    model.add(Conv2D(128, 3, activation='relu'))
+    model.add(MaxPooling2D(2))
+    model.add(Conv2D(256, 2, activation='relu'))
+    model.add(MaxPooling2D(2))
+    model.add(Flatten())
+    model.add(Dense(32,kernel_initializer='normal', activation='relu'))
     model.add(Dense(1, kernel_initializer='normal'))
+    model.add(Dense(len(DATA_SET_COLS)))
     model.compile(loss='mean_squared_error', optimizer='adam')
     return model
 
